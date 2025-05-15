@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
+    "lint": "eslint . ",
     "start": "node build/server.js",
     "build": "tsup src --out-dir build"
   },
@@ -20,7 +21,10 @@
   },
   "homepage": "https://github.com/lucastenani/api-solid#readme",
   "devDependencies": {
+    "@rocketseat/eslint-config": "2.2.2",
     "@types/node": "22.15.18",
+    "eslint": "8.57.1",
+    "eslint-plugin-simple-import-sort": "12.1.1",
     "tsup": "8.4.0",
     "tsx": "4.19.4",
     "typescript": "5.8.3"
