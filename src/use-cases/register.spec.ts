@@ -1,25 +1,28 @@
 import { compare } from 'bcryptjs'
 import { describe, expect, it } from 'vitest'
 
+import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
+
+import { UserAlreadyExitsError } from './errors/user-already-exists-error'
 import { RegisterUseCase } from './register'
 
 describe('Register use case', () => {
-  it('should hash user password upon registration', async () => {
-    const registerUseCase = new RegisterUseCase({
-      async findByEmail() {
-        return null
-      },
+  it('should be able to register', async () => {
+    const usersRepository = new InMemoryUsersRepository()
+    const registerUseCase = new RegisterUseCase(usersRepository)
 
-      async create(data) {
-        return {
-          id: 'user-1',
-          name: data.name,
-          email: data.email,
-          created_at: new Date(),
-          password_hash: data.password_hash,
-        }
-      },
+    const { user } = await registerUseCase.execute({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '1234567',
     })
+
+    expect(user.id).toEqual(expect.any(String))
+  })
+
+  it('should hash user password upon registration', async () => {
+    const usersRepository = new InMemoryUsersRepository()
+    const registerUseCase = new RegisterUseCase(usersRepository)
 
     const { user } = await registerUseCase.execute({
       name: 'John Doe',
@@ -33,5 +36,26 @@ describe('Register use case', () => {
     )
 
     expect(isPasswordCorrectlyHashed).toBe(true)
+  })
+
+  it('should not be able to register with same email twice', async () => {
+    const usersRepository = new InMemoryUsersRepository()
+    const registerUseCase = new RegisterUseCase(usersRepository)
+
+    const email = 'johndoe@example.com'
+
+    await registerUseCase.execute({
+      name: 'John Doe',
+      email,
+      password: '1234567',
+    })
+
+    expect(() =>
+      registerUseCase.execute({
+        name: 'John Doe',
+        email,
+        password: '1234567',
+      }),
+    ).rejects.toBeInstanceOf(UserAlreadyExitsError)
   })
 })
