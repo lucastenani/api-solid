@@ -13,7 +13,7 @@ Perfect for applying clean architecture and solid software design patterns.
 
 ## FRs (Functional Requirements)
 
-- [ ] It must be possible to register;
+- [x] It must be possible to register;
 - [ ] It must be possible to authenticate;
 - [ ] It must be possible to retrieve the profile of a logged-in user;
 - [ ] It must be possible to retrieve the number of check-ins made by the logged-in user;
@@ -26,7 +26,7 @@ Perfect for applying clean architecture and solid software design patterns.
 
 ## BRs (Business Rules)
 
-- [ ] A user must not be able to register with a duplicate email;
+- [x] A user must not be able to register with a duplicate email;
 - [ ] A user must not be able to perform more than one check-in per day;
 - [ ] A user must not be able to check in unless they are within 100 meters of the gym;
 - [ ] A check-in can only be validated within 20 minutes of its creation;
