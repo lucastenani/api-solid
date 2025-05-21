@@ -14,7 +14,7 @@ Perfect for applying clean architecture and solid software design patterns.
 ## FRs (Functional Requirements)
 
 - [x] It must be possible to register;
-- [ ] It must be possible to authenticate;
+- [x] It must be possible to authenticate;
 - [ ] It must be possible to retrieve the profile of a logged-in user;
 - [ ] It must be possible to retrieve the number of check-ins made by the logged-in user;
 - [ ] It must be possible for the user to retrieve their check-in history;
@@ -35,7 +35,7 @@ Perfect for applying clean architecture and solid software design patterns.
 
 ## NFRs (Non-Functional Requirements)
 
-- [ ] The user's password must be encrypted;
-- [ ] The application data must be persisted in a PostgreSQL database;
+- [x] The user's password must be encrypted;
+- [x] The application data must be persisted in a PostgreSQL database;
 - [ ] All data listings must be paginated with 20 items per page;
 - [ ] The user must be identified via a JWT (JSON Web Token);
