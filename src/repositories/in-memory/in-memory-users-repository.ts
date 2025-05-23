@@ -8,7 +8,13 @@ export class InMemoryUsersRepository implements UsersRepository {
   async findByEmail(email: string) {
     const user = this.items.find((item) => item.email === email)
 
-    return !user ? null : user
+    return user || null
+  }
+
+  async findById(id: string) {
+    const user = this.items.find((item) => item.id === id)
+
+    return user || null
   }
 
   async create(data: Prisma.UserCreateInput) {
@@ -25,7 +31,3 @@ export class InMemoryUsersRepository implements UsersRepository {
     return user
   }
 }
-
-// async findByEmail() {
-//       return null
-//     },
