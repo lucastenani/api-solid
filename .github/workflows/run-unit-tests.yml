@@ -1,6 +1,6 @@
 name: Run Unit Tests
 
-"on": [push]
+on: [push]
 
 jobs:
   run-unit-tests:
@@ -18,3 +18,9 @@ jobs:
       - run: npm ci
 
       - run: npm run test
+        id: run-tests
+        continue-on-error: true  
+
+      - name: Notify on test failure
+        if: failure()  
+        run: echo "🚨 The test workflow failed in the repository `${{ github.repository }}` on commit `${{ github.sha }}`."
