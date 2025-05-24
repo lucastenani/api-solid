@@ -31,7 +31,7 @@ describe('Authenticate use case', () => {
   })
 
   it('should not be able to authenticate', async () => {
-    expect(() =>
+    await expect(() =>
       authenticateUseCase.execute({
         email: 'johndoe@example.com',
         password: '1234567',
@@ -46,7 +46,7 @@ describe('Authenticate use case', () => {
       password_hash: await hash('1234567', 6),
     })
 
-    expect(() =>
+    await expect(() =>
       authenticateUseCase.execute({
         email: 'johndoe@example.com',
         password: '12345678',

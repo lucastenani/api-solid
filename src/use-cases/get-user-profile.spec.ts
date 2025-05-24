@@ -31,7 +31,7 @@ describe('Get User Profile use case', () => {
   })
 
   it('should not be able to get user profile with wrong ID', async () => {
-    expect(() =>
+    await expect(() =>
       getUserProfileUseCase.execute({
         userId: 'wrongId',
       }),
