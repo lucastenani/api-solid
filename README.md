@@ -28,7 +28,7 @@ Perfect for applying clean architecture and solid software design patterns.
 
 - [x] A user must not be able to register with a duplicate email;
 - [x] A user must not be able to perform more than one check-in per day;
-- [ ] A user must not be able to check in unless they are within 100 meters of the gym;
+- [x] A user must not be able to check in unless they are within 100 meters of the gym;
 - [ ] A check-in can only be validated within 20 minutes of its creation;
 - [ ] Only administrators can validate check-ins;
 - [ ] Only administrators can register gyms;
