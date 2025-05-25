@@ -11,18 +11,18 @@ let gymsRepository: InMemoryGymsRepository
 let checkInUseCase: CheckInUseCase
 
 describe('Check-in Use Case', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     checkInsRepository = new InMemoryCheckInsRepository()
     gymsRepository = new InMemoryGymsRepository()
     checkInUseCase = new CheckInUseCase(checkInsRepository, gymsRepository)
 
-    gymsRepository.items.push({
+    await gymsRepository.create({
       id: 'gym-01',
-      title: 'JavaScript Gym',
-      description: '',
-      phone: '',
-      latitude: new Decimal(37.42219885095506),
-      longitude: new Decimal(-122.08508817896211),
+      title: 'Iron Strength Gym',
+      description: 'Fully equipped gym with modern machines and group classes.',
+      phone: '+1 (555) 123-4567',
+      latitude: 40.712776,
+      longitude: -74.005974,
     })
 
     vi.useFakeTimers()
@@ -36,8 +36,8 @@ describe('Check-in Use Case', () => {
     const { checkIn } = await checkInUseCase.execute({
       gymId: 'gym-01',
       userId: 'user-01',
-      userLatitude: 37.42219885095506,
-      userLongitude: -122.08508817896211,
+      userLatitude: 40.712776,
+      userLongitude: -74.005974,
     })
 
     expect(checkIn.id).toEqual(expect.any(String))
@@ -49,16 +49,16 @@ describe('Check-in Use Case', () => {
     await checkInUseCase.execute({
       gymId: 'gym-01',
       userId: 'user-01',
-      userLatitude: 37.42219885095506,
-      userLongitude: -122.08508817896211,
+      userLatitude: 40.712776,
+      userLongitude: -74.005974,
     })
 
     await expect(() =>
       checkInUseCase.execute({
         gymId: 'gym-01',
         userId: 'user-01',
-        userLatitude: 37.42219885095506,
-        userLongitude: -122.08508817896211,
+        userLatitude: 40.712776,
+        userLongitude: -74.005974,
       }),
     ).rejects.toBeInstanceOf(Error)
   })
@@ -69,8 +69,8 @@ describe('Check-in Use Case', () => {
     await checkInUseCase.execute({
       gymId: 'gym-01',
       userId: 'user-01',
-      userLatitude: 37.42219885095506,
-      userLongitude: -122.08508817896211,
+      userLatitude: 40.712776,
+      userLongitude: -74.005974,
     })
 
     vi.setSystemTime(new Date(2022, 0, 21, 8, 0, 0))
@@ -78,8 +78,8 @@ describe('Check-in Use Case', () => {
     const { checkIn } = await checkInUseCase.execute({
       gymId: 'gym-01',
       userId: 'user-01',
-      userLatitude: 37.42219885095506,
-      userLongitude: -122.08508817896211,
+      userLatitude: 40.712776,
+      userLongitude: -74.005974,
     })
 
     expect(checkIn.id).toEqual(expect.any(String))
@@ -91,16 +91,17 @@ describe('Check-in Use Case', () => {
       title: 'React Gym',
       description: '',
       phone: '',
-      latitude: new Decimal(37.42219885095506),
-      longitude: new Decimal(-122.08508817896211),
+      latitude: new Decimal(40.712776),
+      longitude: new Decimal(-74.005974),
     })
 
     expect(() =>
       checkInUseCase.execute({
         gymId: 'gym-01',
         userId: 'user-01',
-        userLatitude: 37.4074606,
-        userLongitude: -122.0866141,
+        userLatitude: 40.711282601375814,
+
+        userLongitude: -74.00877802597236,
       }),
     ).rejects.toBeInstanceOf(Error)
   })
