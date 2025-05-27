@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 import { InMemoryCheckInsRepository } from '@/repositories/in-memory/in-memory-check-ins-repository'
 
@@ -13,10 +13,6 @@ describe('Fetch User Check-in History Use Case', () => {
     fetchUserCheckInHistoryUseCase = new FetchUserCheckInHistoryUseCase(
       checkInsRepository,
     )
-  })
-
-  afterEach(() => {
-    vi.useRealTimers()
   })
 
   it('should be able to fetch check in history', async () => {
@@ -54,8 +50,6 @@ describe('Fetch User Check-in History Use Case', () => {
       userId: 'user-01',
       page: 2,
     })
-
-    console.log(checkIns)
 
     expect(checkIns).toHaveLength(2)
     expect(checkIns).toEqual([
