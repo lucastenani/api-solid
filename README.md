@@ -37,5 +37,5 @@ Perfect for applying clean architecture and solid software design patterns.
 
 - [x] The user's password must be encrypted;
 - [x] The application data must be persisted in a PostgreSQL database;
-- [ ] All data listings must be paginated with 20 items per page;
+- [x] All data listings must be paginated with 20 items per page;
 - [ ] The user must be identified via a JWT (JSON Web Token);
