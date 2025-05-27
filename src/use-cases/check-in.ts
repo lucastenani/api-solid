@@ -21,7 +21,7 @@ interface checkInUseCaseResponse {
 
 export class CheckInUseCase {
   constructor(
-    private checkInRepository: CheckInsRepository,
+    private checkInsRepository: CheckInsRepository,
     private gymsRepository: GymsRepository,
   ) {}
 
@@ -51,7 +51,7 @@ export class CheckInUseCase {
       throw new MaxDistanceError()
     }
 
-    const checkInOnSameDate = await this.checkInRepository.findByUserIdOnDate(
+    const checkInOnSameDate = await this.checkInsRepository.findByUserIdOnDate(
       userId,
       new Date(),
     )
@@ -60,7 +60,7 @@ export class CheckInUseCase {
       throw new MaxNumberOfCheckInsError()
     }
 
-    const checkIn = await this.checkInRepository.create({
+    const checkIn = await this.checkInsRepository.create({
       gym_id: gymId,
       user_id: userId,
     })
